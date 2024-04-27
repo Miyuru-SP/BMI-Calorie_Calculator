@@ -1,24 +1,40 @@
+import 'package:medical_app/colors.dart';
+import 'package:medical_app/login_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:medical_app/auth/loginScreen.dart';
-import 'package:medical_app/bmiScreens/bmiScreen.dart';
-import 'package:medical_app/calorieCalScreen/calorieNextScreen.dart';
+import 'package:medical_app/startScreen.dart';
 import 'package:medical_app/homeScreen.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'package:shared_preferences/shared_preferences.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  // Initialize uni_links
+
+  //..........when the user once logged in, he directly moves to home
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  final bool isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+
+  runApp(MyApp(isLoggedIn: isLoggedIn));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  //........
+  final bool isLoggedIn;
+  const MyApp({required this.isLoggedIn});
+  //'''''''
+  //const MyApp({super.key});
 
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData.dark().copyWith(
-          primaryColor: Color(0xFF0A0E21),
-          scaffoldBackgroundColor: Color(0xFF0A0E21),
+        title: 'Email and password login',
+        theme: ThemeData(
+          primarySwatch: createMaterialColor(const Color(0xFFff5003)),
         ),
-        home: HomeScreen());
+        home: isLoggedIn ? HomeScreen() : StartScreen());
   }
 }
