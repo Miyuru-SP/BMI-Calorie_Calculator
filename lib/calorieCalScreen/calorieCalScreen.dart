@@ -5,8 +5,8 @@ import 'package:medical_app/calorieCalScreen/imageTextCard.dart';
 import 'package:medical_app/widgets/button.dart';
 import 'package:medical_app/widgets/const.dart';
 
-const Color inactiveCard = Color(0xFF303030);
-const Color activeCard = Color(0xFF202020);
+const Color inactiveCard = Color(0xFF111328);
+const Color activeCard = Color(0xFF1D1E33);
 
 class CalorieCalculateScreen extends StatefulWidget {
   const CalorieCalculateScreen({super.key});
@@ -57,23 +57,6 @@ class _CalorieCalculateScreenState extends State<CalorieCalculateScreen> {
                         child: GestureDetector(
                           onTap: () {
                             setState(() {
-                              print("FEMALE");
-                              updateGenderSelected(2);
-                            });
-                          },
-                          child: ReusableCard(
-                            color: femaleCard,
-                            card: ImageTextCard(
-                              text: 'FEMALE',
-                              icon: FontAwesomeIcons.venus,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () {
-                            setState(() {
                               print("MALE");
                               updateGenderSelected(1);
                             });
@@ -83,6 +66,23 @@ class _CalorieCalculateScreenState extends State<CalorieCalculateScreen> {
                             card: ImageTextCard(
                               text: "MALE",
                               icon: FontAwesomeIcons.mars,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              print("FEMALE");
+                              updateGenderSelected(2);
+                            });
+                          },
+                          child: ReusableCard(
+                            color: femaleCard,
+                            card: ImageTextCard(
+                              text: 'FEMALE',
+                              icon: FontAwesomeIcons.venus,
                             ),
                           ),
                         ),
