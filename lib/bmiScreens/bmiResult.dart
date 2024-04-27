@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:medical_app/widgets/button.dart';
 import 'package:medical_app/widgets/const.dart';
 
@@ -8,20 +9,47 @@ class BMIResultScreen extends StatelessWidget {
   final String advise;
   final Color textColor;
 
-  BMIResultScreen(
-      {required this.textColor,
-      required this.resultText,
-      required this.bmi,
-      required this.advise});
+  BMIResultScreen({
+    required this.textColor,
+    required this.resultText,
+    required this.bmi,
+    required this.advise,
+  });
+
+  Future<void> _saveResultToFirestore() async {
+    try {
+      // Initialize Cloud Firestore
+      FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+      // Add document to a collection (assuming you have a collection named 'bmi_results')
+      await firestore.collection('bmi_results').add({
+        'result_text': resultText,
+        'bmi': bmi,
+        'advise': advise,
+        'timestamp': DateTime.now(), // You can add a timestamp if needed
+      });
+
+      print('BMI result saved to Firestore');
+    } catch (error) {
+      print('Error saving BMI result: $error');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-          child: Text('BMI CALCULATOR'),
+        title: Text(
+          "BMI CALCULATOR",
+          style: TextStyle(
+            color: Colors.white,
+          ),
         ),
+        centerTitle: true,
+        backgroundColor: Color(0xFF202020),
+        iconTheme: IconThemeData(color: Colors.white),
       ),
+      backgroundColor: Color.fromARGB(255, 16, 17, 29),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -32,7 +60,7 @@ class BMIResultScreen extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               child: Text(
                 'Your Result',
-                style: ktitleTextStyle,
+                style: ktitleTextStyle.copyWith(color: Colors.white),
               ),
             ),
           ),
@@ -54,48 +82,34 @@ class BMIResultScreen extends StatelessWidget {
                   ),
                   Text(
                     bmi,
-                    style: kBMITextStyle,
+                    style: kBMITextStyle.copyWith(color: Colors.white),
                   ),
                   Text(
                     'Normal BMI range:',
-                    style: klabelTextStyle,
+                    style: klabelTextStyle.copyWith(color: Colors.white),
                   ),
                   Text(
                     '18.5 - 25 kg/m2',
-                    style: kBodyTextStyle,
+                    style: klabelTextStyle.copyWith(color: Colors.white),
                   ),
                   Text(
                     advise,
                     textAlign: TextAlign.center,
-                    style: kBodyTextStyle,
+                    style: kBodyTextStyle.copyWith(color: Colors.white),
                   ),
                   SizedBox(
                     height: 15.0,
-                  ),
-                  RawMaterialButton(
-                    onPressed: () {},
-                    constraints: BoxConstraints.tightFor(
-                      width: 200.0,
-                      height: 56.0,
-                    ),
-                    fillColor: Color(0xFF4C4F5E),
-                    elevation: 0.0,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0)),
-                    child: Text(
-                      'SAVE RESULT',
-                      style: kBodyTextStyle,
-                    ),
                   ),
                 ],
               ),
             ),
           ),
           BottomContainer(
-              text: 'RE-CALCULATE',
-              onTap: () {
-                Navigator.pop(context);
-              }),
+            text: 'RE-CALCULATE',
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
         ],
       ),
     );

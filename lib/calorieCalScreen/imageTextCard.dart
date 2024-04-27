@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 
 class ImageTextCard extends StatelessWidget {
-  ImageTextCard({required this.text, required this.icon});
+  ImageTextCard({
+    required this.text,
+    required this.icon,
+    required this.iconColor,
+  });
 
   final String text;
   final IconData icon;
+  final Color iconColor;
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +19,7 @@ class ImageTextCard extends StatelessWidget {
         Icon(
           icon,
           size: 70,
+          color: iconColor,
         ),
         SizedBox(
           height: 15.0,
@@ -22,7 +28,7 @@ class ImageTextCard extends StatelessWidget {
           text,
           style: TextStyle(
             fontSize: 18,
-            color: Color(0xFFDCDCDC),
+            color: Colors.white,
             fontWeight: FontWeight.w500,
           ),
         ),

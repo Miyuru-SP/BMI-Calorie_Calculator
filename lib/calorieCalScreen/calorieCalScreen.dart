@@ -5,8 +5,8 @@ import 'package:medical_app/calorieCalScreen/imageTextCard.dart';
 import 'package:medical_app/widgets/button.dart';
 import 'package:medical_app/widgets/const.dart';
 
-const Color inactiveCard = Color(0xFF111328);
-const Color activeCard = Color(0xFF1D1E33);
+const Color inactiveCard = Color(0xFF1D1E33);
+const Color activeCard = Color.fromARGB(255, 36, 39, 77);
 
 class CalorieCalculateScreen extends StatefulWidget {
   const CalorieCalculateScreen({super.key});
@@ -22,7 +22,7 @@ enum Gender {
 
 class _CalorieCalculateScreenState extends State<CalorieCalculateScreen> {
   Color maleCard = inactiveCard, femaleCard = inactiveCard;
-  int height = 180, weight = 60, age = 25;
+  int height = 160, weight = 50, age = 20;
   String gender = "";
   void updateGenderSelected(int x) {
     if (x == 1) {
@@ -40,10 +40,17 @@ class _CalorieCalculateScreenState extends State<CalorieCalculateScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-          child: Text('CALORIE CALCULATOR'),
+        title: Text(
+          "CALORIE CALCULATOR",
+          style: TextStyle(
+            color: Colors.white,
+          ),
         ),
+        centerTitle: true,
+        backgroundColor: Color(0xFF202020),
+        iconTheme: IconThemeData(color: Colors.white),
       ),
+      backgroundColor: Color.fromARGB(255, 16, 17, 29),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -66,6 +73,7 @@ class _CalorieCalculateScreenState extends State<CalorieCalculateScreen> {
                             card: ImageTextCard(
                               text: "MALE",
                               icon: FontAwesomeIcons.mars,
+                              iconColor: Colors.white,
                             ),
                           ),
                         ),
@@ -83,6 +91,7 @@ class _CalorieCalculateScreenState extends State<CalorieCalculateScreen> {
                             card: ImageTextCard(
                               text: 'FEMALE',
                               icon: FontAwesomeIcons.venus,
+                              iconColor: Colors.white,
                             ),
                           ),
                         ),
@@ -110,7 +119,7 @@ class _CalorieCalculateScreenState extends State<CalorieCalculateScreen> {
                     children: [
                       Text(
                         height.toString(),
-                        style: kDigitTextStyle,
+                        style: kDigitTextStyle.copyWith(color: Colors.white),
                       ),
                       Text(
                         'cm',
@@ -164,7 +173,8 @@ class _CalorieCalculateScreenState extends State<CalorieCalculateScreen> {
                           children: [
                             Text(
                               weight.toString(),
-                              style: kDigitTextStyle,
+                              style:
+                                  kDigitTextStyle.copyWith(color: Colors.white),
                             ),
                             Text(
                               'kg',
@@ -217,7 +227,8 @@ class _CalorieCalculateScreenState extends State<CalorieCalculateScreen> {
                           children: [
                             Text(
                               age.toString(),
-                              style: kDigitTextStyle,
+                              style:
+                                  kDigitTextStyle.copyWith(color: Colors.white),
                             ),
                             Text(
                               'y',

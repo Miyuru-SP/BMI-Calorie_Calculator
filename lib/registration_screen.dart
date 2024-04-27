@@ -8,6 +8,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:medical_app/homeScreen.dart';
+import 'package:medical_app/widgets/const.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({super.key});
@@ -252,7 +253,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     ///signup button
     final signUpButton = Material(
       elevation: 5,
-      color: mainColor,
+      color: kbottomContainerColor,
       borderRadius: BorderRadius.circular(30),
       child: MaterialButton(
         padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
@@ -285,14 +286,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        SizedBox(
-                          height: 150,
-                          child: Image.asset(
-                            "assets/images/cafe_logo.png",
-                            width: 130,
-                            fit: BoxFit.contain,
-                          ),
-                        ),
+                        // SizedBox(
+                        //   height: 150,
+                        //   child: Image.asset(
+                        //     "assets/images/cafe_logo.png",
+                        //     width: 130,
+                        //     fit: BoxFit.contain,
+                        //   ),
+                        // ),
                         const SizedBox(
                           height: 20,
                         ),
@@ -340,9 +341,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               child: const Text(
                                 "Login",
                                 style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                    color: mainColor),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                  color: kbottomContainerColor,
+                                ),
                               ),
                             )
                           ],
@@ -423,7 +425,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text("Account Created Successfully !"),
-        backgroundColor: mainColor, // Set the background color to orange
+        backgroundColor:
+            kbottomContainerColor, // Set the background color to orange
       ),
     );
 

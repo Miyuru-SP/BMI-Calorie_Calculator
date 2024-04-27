@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:medical_app/colors.dart';
 import 'package:medical_app/login_screen.dart';
+import 'package:medical_app/widgets/const.dart';
 
 class ResetPassScreen extends StatefulWidget {
   const ResetPassScreen({super.key});
@@ -48,7 +49,7 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
 
     final resetBtn = Material(
       elevation: 5,
-      color: mainColor,
+      color: kbottomContainerColor,
       borderRadius: BorderRadius.circular(30),
       child: MaterialButton(
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
@@ -88,7 +89,7 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
           'Forget Password',
           style: TextStyle(color: Colors.black),
         ),
-        backgroundColor: mainColor,
+        backgroundColor: kbottomContainerColor,
       ),
       body: Stack(
         children: [
@@ -106,14 +107,14 @@ class _ResetPassScreenState extends State<ResetPassScreen> {
                       const SizedBox(
                         height: 20,
                       ),
-                      SizedBox(
-                        height: 200,
-                        child: Image.asset(
-                          "assets/images/cafe_logo.png",
-                          width: 180,
-                          fit: BoxFit.contain,
-                        ),
-                      ),
+                      // SizedBox(
+                      //   height: 200,
+                      //   child: Image.asset(
+                      //     "assets/images/cafe_logo.png",
+                      //     width: 180,
+                      //     fit: BoxFit.contain,
+                      //   ),
+                      // ),
                       const SizedBox(
                         height: 65,
                       ),

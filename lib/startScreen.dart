@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
-import 'package:medical_app/colors.dart';
 import 'package:medical_app/login_screen.dart';
 import 'package:medical_app/registration_screen.dart';
+import 'package:medical_app/widgets/const.dart';
 
 class StartScreen extends StatefulWidget {
   const StartScreen({super.key});
@@ -18,7 +17,7 @@ class _StartScreenState extends State<StartScreen> {
       children: [
         Material(
           elevation: 5,
-          color: mainColor,
+          color: kbottomContainerColor,
           borderRadius: BorderRadius.circular(30),
           child: MaterialButton(
             padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
@@ -47,7 +46,7 @@ class _StartScreenState extends State<StartScreen> {
       children: [
         Material(
           elevation: 5,
-          color: mainColor,
+          color: kbottomContainerColor,
           borderRadius: BorderRadius.circular(30),
           child: MaterialButton(
             padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
@@ -82,7 +81,7 @@ class _StartScreenState extends State<StartScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             const SizedBox(height: 40.0),
-            Lottie.asset('assets/animations/Hi Ani.json'),
+            //Lottie.asset('assets/animations/Hi Ani.json'),
             const SizedBox(height: 20.0),
             const Text(
               'Welcome to',
@@ -92,7 +91,7 @@ class _StartScreenState extends State<StartScreen> {
               ),
             ),
             const Text(
-              'Café Miron',
+              'BodyFit',
               style: TextStyle(
                 fontSize: 45.0,
                 fontWeight: FontWeight.bold,
@@ -100,10 +99,9 @@ class _StartScreenState extends State<StartScreen> {
               ),
             ),
             const Text(
-              'ñysß m<uq fm, ri ',
+              'Stay Fit, Stay Healthy',
               style: TextStyle(
-                fontFamily: "SinhalaFont",
-                fontSize: 25.0,
+                fontSize: 20.0,
                 color: Color.fromARGB(255, 118, 118, 118),
               ),
             ),

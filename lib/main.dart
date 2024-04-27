@@ -4,12 +4,18 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:medical_app/startScreen.dart';
 import 'package:medical_app/homeScreen.dart';
+import 'package:medical_app/widgets/const.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+      options: FirebaseOptions(
+          apiKey: "AIzaSyDGT7_OARq6UiuriBFlcc5uluYLI6t2e4g",
+          appId: "1:454073212600:android:d77b3a81fad7121d9c5e4d",
+          messagingSenderId: "454073212600",
+          projectId: "medicalapplication-608e0"));
   // Initialize uni_links
 
   //..........when the user once logged in, he directly moves to home
@@ -31,9 +37,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Email and password login',
+        title: 'BodyFit',
         theme: ThemeData(
-          primarySwatch: createMaterialColor(const Color(0xFFff5003)),
+          primarySwatch: Colors.red,
         ),
         home: isLoggedIn ? HomeScreen() : StartScreen());
   }

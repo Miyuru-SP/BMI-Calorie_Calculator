@@ -1,11 +1,11 @@
 import 'package:medical_app/auth_helper.dart';
-import 'package:medical_app/colors.dart';
 import 'package:medical_app/registration_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:medical_app/resetPasswordScreen.dart';
 import 'package:medical_app/homeScreen.dart';
+import 'package:medical_app/widgets/const.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -40,7 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
       if (user != null) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text("Welcome to Cafe Miron !"),
+            content: Text("Welcome to BodyFit"),
             backgroundColor: Colors.black, // Set the background color to orange
           ),
         );
@@ -144,7 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
       children: [
         Material(
             elevation: 5,
-            color: mainColor,
+            color: kbottomContainerColor,
             borderRadius: BorderRadius.circular(30),
             child: IgnorePointer(
               ignoring: _isLoading,
@@ -176,7 +176,7 @@ class _LoginScreenState extends State<LoginScreen> {
         child: TextButton(
           child: const Text(
             "Forget Password ?",
-            style: TextStyle(color: mainColor),
+            style: TextStyle(color: kbottomContainerColor),
           ),
           onPressed: () {
             Navigator.push(
@@ -206,14 +206,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       const SizedBox(
                         height: 80,
                       ),
-                      SizedBox(
-                        height: 200,
-                        child: Image.asset(
-                          "assets/images/cafe_logo.png",
-                          width: 180,
-                          fit: BoxFit.contain,
-                        ),
-                      ),
+                      // SizedBox(
+                      //   height: 200,
+                      //   child: Image.asset(
+                      //     "assets/images/cafe_logo.png",
+                      //     width: 180,
+                      //     fit: BoxFit.contain,
+                      //   ),
+                      // ),
                       const SizedBox(
                         height: 45,
                       ),
@@ -252,7 +252,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 15,
-                                color: mainColor,
+                                color: kbottomContainerColor,
                               ),
                             ),
                           )

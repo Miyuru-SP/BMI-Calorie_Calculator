@@ -10,7 +10,9 @@ const iconSize = 80.0;
 class IconContent extends StatelessWidget {
   final IconData myicon;
   final String text;
-  IconContent({required this.myicon, required this.text});
+  final Color iconColor;
+  IconContent(
+      {required this.myicon, required this.text, required this.iconColor});
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -19,6 +21,7 @@ class IconContent extends StatelessWidget {
         Icon(
           myicon,
           size: iconSize,
+          color: iconColor,
         ),
         sizedBox,
         Text(

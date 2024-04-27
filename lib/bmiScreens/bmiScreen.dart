@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:medical_app/bmiScreens/bmiCalculation.dart';
@@ -31,10 +33,17 @@ class _BMIScreenState extends State<BMIScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-          child: Text('BMI CALCULATOR'),
+        title: Text(
+          "BMI CALCULATOR",
+          style: TextStyle(
+            color: Colors.white,
+          ),
         ),
+        centerTitle: true,
+        backgroundColor: Color(0xFF202020),
+        iconTheme: IconThemeData(color: Colors.white),
       ),
+      backgroundColor: Color.fromARGB(255, 16, 17, 29),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -46,15 +55,17 @@ class _BMIScreenState extends State<BMIScreen> {
                     onTap: () {
                       setState(() {
                         selectedGender = Gender.male;
+                        print(selectedGender);
                       });
                     },
                     child: ReusableBg(
                       colour: selectedGender == Gender.male
-                          ? kactiveCardColor
-                          : kinactiveCardColor,
+                          ? kinactiveCardColor
+                          : kactiveCardColor,
                       cardChild: IconContent(
                         myicon: Icons.male,
                         text: 'MALE',
+                        iconColor: Colors.white,
                       ),
                     ),
                   ),
@@ -64,14 +75,18 @@ class _BMIScreenState extends State<BMIScreen> {
                     onTap: () {
                       setState(() {
                         selectedGender = Gender.female;
+                        print(selectedGender);
                       });
                     },
                     child: ReusableBg(
                       colour: selectedGender == Gender.female
-                          ? kactiveCardColor
-                          : kinactiveCardColor,
-                      cardChild:
-                          IconContent(myicon: Icons.female, text: 'FEMALE'),
+                          ? kinactiveCardColor
+                          : kactiveCardColor,
+                      cardChild: IconContent(
+                        myicon: Icons.female,
+                        text: 'FEMALE',
+                        iconColor: Colors.white,
+                      ),
                     ),
                   ),
                 ),
@@ -95,7 +110,7 @@ class _BMIScreenState extends State<BMIScreen> {
                     children: [
                       Text(
                         height.toString(),
-                        style: kDigitTextStyle,
+                        style: kDigitTextStyle.copyWith(color: Colors.white),
                       ),
                       Text(
                         'cm',
@@ -149,7 +164,8 @@ class _BMIScreenState extends State<BMIScreen> {
                           children: [
                             Text(
                               weight.toString(),
-                              style: kDigitTextStyle,
+                              style:
+                                  kDigitTextStyle.copyWith(color: Colors.white),
                             ),
                             Text(
                               'kg',
@@ -202,7 +218,8 @@ class _BMIScreenState extends State<BMIScreen> {
                           children: [
                             Text(
                               age.toString(),
-                              style: kDigitTextStyle,
+                              style:
+                                  kDigitTextStyle.copyWith(color: Colors.white),
                             ),
                             Text(
                               'y',
@@ -241,22 +258,44 @@ class _BMIScreenState extends State<BMIScreen> {
           ),
           BottomContainer(
             text: 'CALCULATE',
-            onTap: () {
+            onTap: () async {
+              // Get the current user's UID
+              String uid = FirebaseAuth.instance.currentUser!.uid;
+
+              // Calculate the BMI
               Calculate calc = Calculate(height: height, weight: weight);
+              String bmi = calc.result();
+              String resultText = calc.getText();
+              String advise = calc.getAdvise();
+              Color textColor = calc.getTextColor();
+
+              // Save the data to Firestore
+              await FirebaseFirestore.instance.collection('bmi_results').add({
+                'user_id': uid,
+                'gender': selectedGender == Gender.male ? 'Male' : 'Female',
+                'height': height,
+                'weight': weight,
+                'age': age,
+                'bmi': bmi,
+                'result_text': resultText,
+                'advise': advise,
+                'timestamp':
+                    DateTime.now(), // You can add a timestamp if needed
+              });
 
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => BMIResultScreen(
-                    bmi: calc.result(),
-                    resultText: calc.getText(),
-                    advise: calc.getAdvise(),
-                    textColor: calc.getTextColor(),
+                    bmi: bmi,
+                    resultText: resultText,
+                    advise: advise,
+                    textColor: textColor,
                   ),
                 ),
               );
             },
-          ),
+          )
         ],
       ),
 

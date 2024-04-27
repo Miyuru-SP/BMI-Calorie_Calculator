@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:medical_app/calorieCalScreen/calculate.dart';
 import 'package:medical_app/calorieCalScreen/result.dart';
@@ -52,16 +54,23 @@ class _CalorieNextScreenState extends State<CalorieNextScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("CALORIE CALCULATOR"),
+        title: Text(
+          "CALORIE CALCULATOR",
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
         centerTitle: true,
         backgroundColor: Color(0xFF202020),
+        iconTheme: IconThemeData(color: Colors.white),
       ),
+      backgroundColor: Color.fromARGB(255, 16, 17, 29),
       body: Container(
         child: Column(
           children: <Widget>[
             Expanded(
               child: ReusableCard(
-                color: inactiveCard,
+                color: kactiveCardColor,
                 card: Column(
                   children: <Widget>[
                     Text(
@@ -71,7 +80,7 @@ class _CalorieNextScreenState extends State<CalorieNextScreen> {
                     ListTile(
                       title: Text(
                         exerciseList[0],
-                        style: TextStyle(fontSize: 18),
+                        style: TextStyle(fontSize: 18, color: Colors.white),
                       ),
                       leading: Radio(
                         value: exerciseList[0],
@@ -87,7 +96,7 @@ class _CalorieNextScreenState extends State<CalorieNextScreen> {
                     ListTile(
                       title: Text(
                         exerciseList[2],
-                        style: TextStyle(fontSize: 18),
+                        style: TextStyle(fontSize: 18, color: Colors.white),
                       ),
                       leading: Radio(
                         value: exerciseList[2],
@@ -103,7 +112,7 @@ class _CalorieNextScreenState extends State<CalorieNextScreen> {
                     ListTile(
                       title: Text(
                         exerciseList[3],
-                        style: TextStyle(fontSize: 18),
+                        style: TextStyle(fontSize: 18, color: Colors.white),
                       ),
                       leading: Radio(
                         value: exerciseList[3],
@@ -119,7 +128,7 @@ class _CalorieNextScreenState extends State<CalorieNextScreen> {
                     ListTile(
                       title: Text(
                         exerciseList[4],
-                        style: TextStyle(fontSize: 18),
+                        style: TextStyle(fontSize: 18, color: Colors.white),
                       ),
                       leading: Radio(
                         value: exerciseList[4],
@@ -138,7 +147,7 @@ class _CalorieNextScreenState extends State<CalorieNextScreen> {
             ),
             Expanded(
               child: ReusableCard(
-                color: inactiveCard,
+                color: kactiveCardColor,
                 card: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -149,7 +158,7 @@ class _CalorieNextScreenState extends State<CalorieNextScreen> {
                     ListTile(
                       title: Text(
                         goalList[0],
-                        style: TextStyle(fontSize: 18),
+                        style: TextStyle(fontSize: 18, color: Colors.white),
                       ),
                       leading: Radio(
                         value: goalList[0],
@@ -165,7 +174,7 @@ class _CalorieNextScreenState extends State<CalorieNextScreen> {
                     ListTile(
                       title: Text(
                         goalList[1],
-                        style: TextStyle(fontSize: 18),
+                        style: TextStyle(fontSize: 18, color: Colors.white),
                       ),
                       leading: Radio(
                         value: goalList[1],
@@ -181,7 +190,7 @@ class _CalorieNextScreenState extends State<CalorieNextScreen> {
                     ListTile(
                       title: Text(
                         goalList[2],
-                        style: TextStyle(fontSize: 18),
+                        style: TextStyle(fontSize: 18, color: Colors.white),
                       ),
                       leading: Radio(
                         value: goalList[2],
@@ -197,7 +206,7 @@ class _CalorieNextScreenState extends State<CalorieNextScreen> {
                     ListTile(
                       title: Text(
                         goalList[3],
-                        style: TextStyle(fontSize: 18),
+                        style: TextStyle(fontSize: 18, color: Colors.white),
                       ),
                       leading: Radio(
                         value: goalList[3],
@@ -213,7 +222,7 @@ class _CalorieNextScreenState extends State<CalorieNextScreen> {
                     ListTile(
                       title: Text(
                         goalList[4],
-                        style: TextStyle(fontSize: 18),
+                        style: TextStyle(fontSize: 18, color: Colors.white),
                       ),
                       leading: Radio(
                         value: goalList[4],
@@ -236,16 +245,38 @@ class _CalorieNextScreenState extends State<CalorieNextScreen> {
               child: FlatButton(
                 color: Color(0xFFEB1555),
                 text: "Calculate",
-                onPressed: () {
+                onPressed: () async {
                   CalculateCal c = CalculateCal(
-                      height: widget.height,
-                      weight: widget.weight,
-                      age: age,
-                      gender: gender,
-                      goal: _goal,
-                      activity: _activity);
+                    height: widget.height,
+                    weight: widget.weight,
+                    age: age,
+                    gender: gender,
+                    goal: _goal,
+                    activity: _activity,
+                  );
                   c.calculateBMI();
                   c.calculateBMR();
+
+                  // Get the current user's UID
+                  String uid = FirebaseAuth.instance.currentUser!.uid;
+
+                  // Save the data to Firestore
+                  await FirebaseFirestore.instance
+                      .collection('calorieData')
+                      .add({
+                    'uid': uid,
+                    'height': widget.height,
+                    'weight': widget.weight,
+                    'age': age,
+                    'gender': gender,
+                    'activity': _activity,
+                    'goal': _goal,
+                    'bmi': c.calculateBMI(),
+                    'bmr': c.calculateBMR(),
+                    'currentCalorie': c.getActivity(),
+                    'goalCalorie': c.getGoal(),
+                    // Add more fields as needed
+                  });
 
                   Navigator.push(
                     context,
