@@ -258,7 +258,7 @@ class _CalorieCalculateScreenState extends State<CalorieCalculateScreen> {
             minWidth: double.infinity,
             padding: EdgeInsets.symmetric(vertical: 7),
             child: FlatButton(
-              color: Color(0xffbb86fc),
+              color: Color(0xFFEB1555),
               text: "Next",
               onPressed: () {
                 Navigator.push(

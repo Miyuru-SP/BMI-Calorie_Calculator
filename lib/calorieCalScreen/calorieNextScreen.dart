@@ -52,7 +52,7 @@ class _CalorieNextScreenState extends State<CalorieNextScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Calorie Meter"),
+        title: Text("CALORIE CALCULATOR"),
         centerTitle: true,
         backgroundColor: Color(0xFF202020),
       ),
@@ -81,6 +81,7 @@ class _CalorieNextScreenState extends State<CalorieNextScreen> {
                             _activity = value!;
                           });
                         },
+                        activeColor: Color(0xFFEB1555),
                       ),
                     ),
                     ListTile(
@@ -96,6 +97,7 @@ class _CalorieNextScreenState extends State<CalorieNextScreen> {
                             _activity = value!;
                           });
                         },
+                        activeColor: Color(0xFFEB1555),
                       ),
                     ),
                     ListTile(
@@ -111,6 +113,7 @@ class _CalorieNextScreenState extends State<CalorieNextScreen> {
                             _activity = value!;
                           });
                         },
+                        activeColor: Color(0xFFEB1555),
                       ),
                     ),
                     ListTile(
@@ -126,6 +129,7 @@ class _CalorieNextScreenState extends State<CalorieNextScreen> {
                             _activity = value!;
                           });
                         },
+                        activeColor: Color(0xFFEB1555),
                       ),
                     ),
                   ],
@@ -152,9 +156,10 @@ class _CalorieNextScreenState extends State<CalorieNextScreen> {
                         groupValue: _goal,
                         onChanged: (String? value) {
                           setState(() {
-                            _activity = value!;
+                            _goal = value!;
                           });
                         },
+                        activeColor: Color(0xFFEB1555),
                       ),
                     ),
                     ListTile(
@@ -167,9 +172,10 @@ class _CalorieNextScreenState extends State<CalorieNextScreen> {
                         groupValue: _goal,
                         onChanged: (String? value) {
                           setState(() {
-                            _activity = value!;
+                            _goal = value!;
                           });
                         },
+                        activeColor: Color(0xFFEB1555),
                       ),
                     ),
                     ListTile(
@@ -182,9 +188,10 @@ class _CalorieNextScreenState extends State<CalorieNextScreen> {
                         groupValue: _goal,
                         onChanged: (String? value) {
                           setState(() {
-                            _activity = value!;
+                            _goal = value!;
                           });
                         },
+                        activeColor: Color(0xFFEB1555),
                       ),
                     ),
                     ListTile(
@@ -197,9 +204,10 @@ class _CalorieNextScreenState extends State<CalorieNextScreen> {
                         groupValue: _goal,
                         onChanged: (String? value) {
                           setState(() {
-                            _activity = value!;
+                            _goal = value!;
                           });
                         },
+                        activeColor: Color(0xFFEB1555),
                       ),
                     ),
                     ListTile(
@@ -212,9 +220,10 @@ class _CalorieNextScreenState extends State<CalorieNextScreen> {
                         groupValue: _goal,
                         onChanged: (String? value) {
                           setState(() {
-                            _activity = value!;
+                            _goal = value!;
                           });
                         },
+                        activeColor: Color(0xFFEB1555),
                       ),
                     ),
                   ],
@@ -225,7 +234,7 @@ class _CalorieNextScreenState extends State<CalorieNextScreen> {
               minWidth: double.infinity,
               padding: EdgeInsets.symmetric(vertical: 7),
               child: FlatButton(
-                color: Color(0xffbb86fc),
+                color: Color(0xFFEB1555),
                 text: "Calculate",
                 onPressed: () {
                   CalculateCal c = CalculateCal(

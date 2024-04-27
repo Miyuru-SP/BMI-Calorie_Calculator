@@ -18,7 +18,7 @@ class Result extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Calorie Meter"),
+        title: Text("CALORIE CALCULATOR"),
         centerTitle: true,
         backgroundColor: Color(0xFF202020),
       ),
@@ -32,9 +32,9 @@ class Result extends StatelessWidget {
                 'Result',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 50,
-                  fontWeight: FontWeight.w500,
-                ),
+                    fontSize: 30,
+                    fontWeight: FontWeight.w500,
+                    color: Color(0xFFEB1555)),
               ),
               padding: EdgeInsets.only(top: 25),
             ),
